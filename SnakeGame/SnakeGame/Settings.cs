@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace SnakeGame
 {
     public class Settings
@@ -11,10 +6,7 @@ namespace SnakeGame
         private int gameSpeed = 50;
         private int gameWidth = 650;
         private int gameHeigth = 559;
-        public Settings()
-        {
-
-        }
+        public Settings(){}
 
         public int GameSpeed()
         {
@@ -26,13 +18,10 @@ namespace SnakeGame
             return gameWidth;
         }
 
-
         public int GameHeigth()
         {
             return gameHeigth;
         }
-
-  
 
     }
 }

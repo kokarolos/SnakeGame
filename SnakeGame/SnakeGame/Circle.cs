@@ -1,51 +1,23 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
-using System.Collections.Generic;
+﻿using System.Windows.Forms;
 
 namespace SnakeGame
 {
-    public class Circle
+    abstract public class Circle
     {
-        private readonly float Radius = 5f;
-        private float centerX=15 ;
-        private float centerY=15 ;
-        public Circle()
+        public float CenterX { get; set; }
+        public float CenterY { get; set; }
+        public float Width { get; set; }
+        public float Height { get; set; }
+
+        protected Circle(float centerX, float centerY, float width, float height)
         {
-
-        }
-     
-
-        public Circle(float CenterX, float CenterY, float radius)
-        {
-            this.centerX = CenterX;
-            this.centerY = CenterY;
-            this.Radius = radius;
+            CenterX = centerX;
+            CenterY = centerY;
+            Width = width;
+            Height = height;
         }
 
-        public float GetCenterX()
-        {
-            return centerX;
-        }
-
-        public float GetCenterY()
-        {
-            return centerY;
-        }
-
-        public float GetRadius()
-        {
-            return Radius;
-        }
-
-        public  void Draw(PaintEventArgs e)
-        { 
-                Graphics g = e.Graphics;
-                Pen p = new Pen(Color.Gray);
-                SolidBrush b = new SolidBrush(Color.Green);
-                g.DrawEllipse(p, centerX - Radius, centerY - Radius, Radius + Radius, Radius + Radius);
-                g.FillEllipse(b,  centerX - Radius, centerY - Radius, Radius + Radius, Radius + Radius);
-        }
-
+        public abstract void Draw(PaintEventArgs e);
     }
 }
 

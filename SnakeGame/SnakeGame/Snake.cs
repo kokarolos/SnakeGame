@@ -7,7 +7,6 @@ namespace SnakeGame
 {
     public class Snake
     {
-
         private readonly float startingPosX = 300.0f;
         private readonly float startingPosY = 200.0f;
         private readonly int rectHeigth = 16;
@@ -16,25 +15,18 @@ namespace SnakeGame
         private bool keyDown;
         private bool keyLeft;
         private bool keyRight;
-        public bool berryIsEaten;
         private float updatedSnakeX;
         private float updatedSnakeY;
-
-        Settings settings = new Settings();
-        private List<Rectangle> SnakeParts = new List<Rectangle>();
-        Circle list = new Berry();
+        readonly Settings settings = new Settings();
+        public List<Rectangle> SnakeParts = new List<Rectangle>();
+        readonly Circle list = new Berry();
 
         public Snake()
         {
-            SnakeParts.Add(new Rectangle((int)startingPosX,(int)startingPosY,rectWidth,rectHeigth));
+          SnakeParts.Add(new Rectangle((int)startingPosX,(int)startingPosY,rectWidth,rectHeigth));
         }
 
-        public static bool GetBerryCondition()
-        {
-            bool berryisEaten = true;
-            return berryisEaten;
-        }
-
+       
         //responsive for Snake movement
         public void OnSnakeMovement()
         {
@@ -81,7 +73,7 @@ namespace SnakeGame
         }
 
         //checks if snakehead exceeds game borders , or for collision with its body
-        public  void Die()
+        public void Die()
         {
             int i;
             if (SnakeParts[0].X > settings.GameWidth() || SnakeParts[0].Y > settings.GameHeigth() || SnakeParts[0].X < 0 || SnakeParts[0].Y < 0 )
@@ -98,19 +90,12 @@ namespace SnakeGame
         }
 
         // checks the collision with berries
-        public void CheckForCollision()
+        public bool CheckForCollision()=>(Math.Abs(list.CenterX - SnakeParts[0].X) < 15.0f && Math.Abs(list.CenterY - SnakeParts[0].Y) < 15.0f); 
+        
+        public void Eat()
         {
-            if (Math.Abs(list.GetCenterX() - SnakeParts[0].X) < 10.0f && Math.Abs(list.GetCenterY() - SnakeParts[0].Y) < 10.0f) 
-            {
-                GetBerryCondition();
-                Eat();
-            }
-        }
-
-        private void Eat()
-        {
-           SnakeParts.Add(new Rectangle((int)updatedSnakeX, (int)updatedSnakeY+10, rectWidth, rectHeigth));
-           //SnakeParts.Insert(0, new Rectangle((int)updatedSnakesX, (int)updatedSnakesY, rectWidth, rectHeigth));
+             SnakeParts.Add(new Rectangle((int)updatedSnakeX, (int)updatedSnakeY + 10, rectWidth, rectHeigth));
+            //SnakeParts.Insert(0, new Rectangle((int)updatedSnakeX, (int)updatedSnakeY, rectWidth, rectHeigth));
         }
 
         //stores keys into booleans
